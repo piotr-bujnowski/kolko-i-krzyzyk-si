@@ -26,6 +26,8 @@ namespace kolko_i_krzyzyk
                 { B1, B2, B3 },
                 { C1, C2, C3 }
             };
+
+            enableAllCells(false);
         }
 
         private void Cell_Click(object sender, EventArgs e)
@@ -57,6 +59,33 @@ namespace kolko_i_krzyzyk
             }
         }
 
+        private void startResetBtn_Click(object sender, EventArgs e)
+        {
+            if (startResetBtn.Text == "WYCZYŚĆ")
+            {
+                startResetBtn.Text = "START";
+                enableAllCells(false);
+
+                getCellList().ForEach(c => c.Text = " ");
+            }
+            else
+            {
+                startResetBtn.Text = "WYCZYŚĆ";
+                enableAllCells(true);
+                clickCounter = 0;
+            }
+        }
+
+        private void enableAllCells(bool enable)
+        {
+            getCellList().ForEach(c => c.Enabled = enable ? true : false);
+        }
+
+        private List<Button> getCellList()
+        {
+            return cellArray.Cast<Button>().ToList();
+        }
+
         enum Mark
         {
             X,
@@ -68,5 +97,7 @@ namespace kolko_i_krzyzyk
             CZŁOWIEK,
             KOMPUTER
         }
+
+        
     }
 }

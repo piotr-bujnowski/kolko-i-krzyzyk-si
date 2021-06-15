@@ -180,6 +180,7 @@ namespace kolko_i_krzyzyk
             this.startResetBtn.TabIndex = 9;
             this.startResetBtn.Text = "START";
             this.startResetBtn.UseVisualStyleBackColor = true;
+            this.startResetBtn.Click += new System.EventHandler(this.startResetBtn_Click);
             // 
             // choiceBtnLeft
             // 
