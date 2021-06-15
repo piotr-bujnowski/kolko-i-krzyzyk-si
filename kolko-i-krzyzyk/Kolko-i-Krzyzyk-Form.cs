@@ -20,7 +20,7 @@ namespace kolko_i_krzyzyk
         {
             InitializeComponent();
 
-            cellArray = new Button[3, 3]
+            cellArray = new Button[3, 3] 
             {
                 { A1, A2, A3 },
                 { B1, B2, B3 },
@@ -34,14 +34,26 @@ namespace kolko_i_krzyzyk
 
             if (clickCounter % 2 == 0)
             {
-                cell.Text = "X";
+                cell.Text = Mark.X.ToString();
             }
             else
             {
-                cell.Text = "O";
+                cell.Text = Mark.O.ToString();
             }
             cell.Enabled = false;
             clickCounter += 1;
+        }
+
+        enum Mark
+        {
+            X,
+            O
+        }
+
+        enum Choice
+        {
+            CZŁOWIEK,
+            KOMPUTER
         }
     }
 }
