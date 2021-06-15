@@ -13,10 +13,5 @@ namespace kolko_i_krzyzyk
 {
     public partial class kolko_i_krzyzyk : Form
     {
-        public kolko_i_krzyzyk()
-        {
-            InitializeComponent();
-        }
-       
     }
 }
