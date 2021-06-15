@@ -44,6 +44,19 @@ namespace kolko_i_krzyzyk
             clickCounter += 1;
         }
 
+        private void ChoiceBtns_Click(object sender, EventArgs e)
+        {
+            Button choiceBtn = (Button)sender;
+            if (choiceBtn.Text == Choice.CZŁOWIEK.ToString())
+            {
+                choiceBtn.Text = Choice.KOMPUTER.ToString();
+            }
+            else
+            {
+                choiceBtn.Text = Choice.CZŁOWIEK.ToString();
+            }
+        }
+
         enum Mark
         {
             X,

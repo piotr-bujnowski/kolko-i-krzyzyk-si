@@ -187,8 +187,9 @@ namespace kolko_i_krzyzyk
             this.choiceBtnLeft.Name = "choiceBtnLeft";
             this.choiceBtnLeft.Size = new System.Drawing.Size(120, 28);
             this.choiceBtnLeft.TabIndex = 10;
-            this.choiceBtnLeft.Text = "START";
+            this.choiceBtnLeft.Text = "CZŁOWIEK";
             this.choiceBtnLeft.UseVisualStyleBackColor = true;
+            this.choiceBtnLeft.Click += new System.EventHandler(this.ChoiceBtns_Click);
             // 
             // choiceBtnRight
             // 
@@ -196,8 +197,9 @@ namespace kolko_i_krzyzyk
             this.choiceBtnRight.Name = "choiceBtnRight";
             this.choiceBtnRight.Size = new System.Drawing.Size(120, 28);
             this.choiceBtnRight.TabIndex = 11;
-            this.choiceBtnRight.Text = "START";
+            this.choiceBtnRight.Text = "CZŁOWIEK";
             this.choiceBtnRight.UseVisualStyleBackColor = true;
+            this.choiceBtnRight.Click += new System.EventHandler(this.ChoiceBtns_Click);
             // 
             // vsLbl
             // 
