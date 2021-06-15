@@ -43,7 +43,7 @@ namespace kolko_i_krzyzyk
             this.choiceBtnLeft = new System.Windows.Forms.Button();
             this.choiceBtnRight = new System.Windows.Forms.Button();
             this.vsLbl = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.messageLbl = new System.Windows.Forms.Label();
             this.cellGrpBox.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -212,22 +212,22 @@ namespace kolko_i_krzyzyk
             this.vsLbl.TabIndex = 12;
             this.vsLbl.Text = "VS";
             // 
-            // label1
+            // messageLbl
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label1.Location = new System.Drawing.Point(32, 380);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(70, 16);
-            this.label1.TabIndex = 13;
-            this.label1.Text = "Komunikat";
+            this.messageLbl.AutoSize = true;
+            this.messageLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.messageLbl.Location = new System.Drawing.Point(32, 380);
+            this.messageLbl.Name = "messageLbl";
+            this.messageLbl.Size = new System.Drawing.Size(70, 16);
+            this.messageLbl.TabIndex = 13;
+            this.messageLbl.Text = "Komunikat";
             // 
             // kolko_i_krzyzyk
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(378, 426);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.messageLbl);
             this.Controls.Add(this.vsLbl);
             this.Controls.Add(this.choiceBtnRight);
             this.Controls.Add(this.choiceBtnLeft);
@@ -258,7 +258,7 @@ namespace kolko_i_krzyzyk
         private System.Windows.Forms.Button choiceBtnLeft;
         private System.Windows.Forms.Button choiceBtnRight;
         private System.Windows.Forms.Label vsLbl;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label messageLbl;
     }
 }
 

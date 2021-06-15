@@ -14,11 +14,13 @@ namespace kolko_i_krzyzyk
     public partial class kolko_i_krzyzyk : Form
     {
         private Button[,] cellArray;
+        private Model model;
         private int clickCounter;
 
         public kolko_i_krzyzyk()
         {
             InitializeComponent();
+            this.model = new Model();
 
             cellArray = new Button[3, 3] 
             {
@@ -44,6 +46,20 @@ namespace kolko_i_krzyzyk
             }
             cell.Enabled = false;
             clickCounter += 1;
+
+            if (model.checkRowColWin(cellArray) == Mark.X.ToString()
+               || model.checkForCrossWins(cellArray) == Mark.X.ToString())
+            {
+                enableAllCells(false);
+                messageLbl.Text = "Gracz X wygrał!";
+
+            }
+            else if (model.checkRowColWin(cellArray) == Mark.O.ToString()
+                || model.checkForCrossWins(cellArray) == Mark.O.ToString())
+            {
+                enableAllCells(false);
+                messageLbl.Text = "Gracz O wygrał!";
+            }
         }
 
         private void ChoiceBtns_Click(object sender, EventArgs e)
@@ -65,6 +81,7 @@ namespace kolko_i_krzyzyk
             {
                 startResetBtn.Text = "START";
                 enableAllCells(false);
+                messageLbl.Text = "Komunikat";
 
                 getCellList().ForEach(c => c.Text = " ");
             }
@@ -85,19 +102,5 @@ namespace kolko_i_krzyzyk
         {
             return cellArray.Cast<Button>().ToList();
         }
-
-        enum Mark
-        {
-            X,
-            O
-        }
-
-        enum Choice
-        {
-            CZŁOWIEK,
-            KOMPUTER
-        }
-
-        
     }
 }

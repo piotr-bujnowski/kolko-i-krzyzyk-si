@@ -49,12 +49,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Choice.cs" />
     <Compile Include="Kolko-i-Krzyzyk-Form.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Kolko-i-Krzyzyk-Form.Designer.cs">
       <DependentUpon>Kolko-i-Krzyzyk-Form.cs</DependentUpon>
     </Compile>
+    <Compile Include="Mark.cs" />
+    <Compile Include="Model.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Kolko-i-Krzyzyk-Form.resx">
