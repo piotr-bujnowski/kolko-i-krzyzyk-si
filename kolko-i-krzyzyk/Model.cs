@@ -57,8 +57,10 @@ namespace kolko_i_krzyzyk
             }
             return whoWins;
         }
-
+        public bool isDraw(int clickCount)
+        {
+            return clickCount == 9;
+        }
     }
-
     
 }

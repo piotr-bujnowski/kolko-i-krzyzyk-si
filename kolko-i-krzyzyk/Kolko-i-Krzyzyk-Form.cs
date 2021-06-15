@@ -16,13 +16,16 @@ namespace kolko_i_krzyzyk
         private Button[,] cellArray;
         private Model model;
         private int clickCounter;
+        private bool gameEnded;
+        private Random random;
 
         public kolko_i_krzyzyk()
         {
             InitializeComponent();
             this.model = new Model();
+            this.random = new Random();
 
-            cellArray = new Button[3, 3] 
+            cellArray = new Button[3, 3]
             {
                 { A1, A2, A3 },
                 { B1, B2, B3 },
@@ -36,16 +39,44 @@ namespace kolko_i_krzyzyk
         {
             Button cell = (Button)sender;
 
-            if (clickCounter % 2 == 0)
+            if (choiceBtnLeft.Text == Choice.CZŁOWIEK.ToString() && choiceBtnRight.Text == Choice.CZŁOWIEK.ToString())
+            {
+                if (clickCounter % 2 == 0)
+                {
+                    cell.Text = Mark.X.ToString();
+                }
+                else
+                {
+                    cell.Text = Mark.O.ToString();
+                }
+                cell.Enabled = false;
+                clickCounter += 1;
+            }
+            else if (choiceBtnLeft.Text == Choice.CZŁOWIEK.ToString() && choiceBtnRight.Text == Choice.KOMPUTER.ToString())
             {
                 cell.Text = Mark.X.ToString();
+                cell.Enabled = false;
+                clickCounter += 1;
+
+                insertIntoRandomNotOccupiedCell(Mark.O.ToString());
+                clickCounter += 1;
             }
-            else
+            else if (choiceBtnLeft.Text == Choice.KOMPUTER.ToString() && choiceBtnRight.Text == Choice.CZŁOWIEK.ToString())
             {
                 cell.Text = Mark.O.ToString();
+                cell.Enabled = false;
+                clickCounter += 1;
+                
+                insertIntoRandomNotOccupiedCell(Mark.X.ToString());
+                clickCounter += 1;
             }
-            cell.Enabled = false;
-            clickCounter += 1;
+
+
+            if (model.isDraw(clickCounter))
+            {
+                enableAllCells(false);
+                messageLbl.Text = "Remis!";
+            }
 
             if (model.checkRowColWin(cellArray) == Mark.X.ToString()
                || model.checkForCrossWins(cellArray) == Mark.X.ToString())
@@ -80,17 +111,41 @@ namespace kolko_i_krzyzyk
             if (startResetBtn.Text == "WYCZYŚĆ")
             {
                 startResetBtn.Text = "START";
-                enableAllCells(false);
                 messageLbl.Text = "Komunikat";
-
                 getCellList().ForEach(c => c.Text = " ");
+                enableAllCells(false);
+                choiceBtnLeft.Enabled = true;
+                choiceBtnRight.Enabled = true;
             }
             else
             {
                 startResetBtn.Text = "WYCZYŚĆ";
                 enableAllCells(true);
+                choiceBtnLeft.Enabled = false;
+                choiceBtnRight.Enabled = false;
+
                 clickCounter = 0;
+
+                if (choiceBtnLeft.Text == Choice.KOMPUTER.ToString() && choiceBtnRight.Text == Choice.CZŁOWIEK.ToString())
+                {
+                    insertIntoRandomNotOccupiedCell("X");
+                    clickCounter += 1;
+                }
             }
+        }
+        public void insertIntoRandomNotOccupiedCell(String whoseTurn)
+        {
+            int randomIndex = random.Next(0, 9);
+            Button randomBtn = getCellList()[randomIndex];
+
+            while (getCellList()[randomIndex].Text != " ")
+            {
+                randomIndex = random.Next(0, 9);
+                randomBtn = getCellList()[randomIndex];
+            }
+            //randomBtn.Text = whoseTurn;
+            randomBtn.Enabled = false;
+            getCellList()[getCellList().IndexOf(randomBtn)].Text = whoseTurn;
         }
 
         private void enableAllCells(bool enable)
