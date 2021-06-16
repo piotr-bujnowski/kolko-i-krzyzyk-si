@@ -29,6 +29,7 @@ namespace kolko_i_krzyzyk
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.A1 = new System.Windows.Forms.Button();
             this.A2 = new System.Windows.Forms.Button();
             this.A3 = new System.Windows.Forms.Button();
@@ -44,6 +45,9 @@ namespace kolko_i_krzyzyk
             this.choiceBtnRight = new System.Windows.Forms.Button();
             this.vsLbl = new System.Windows.Forms.Label();
             this.messageLbl = new System.Windows.Forms.Label();
+            this.timer = new System.Windows.Forms.Timer(this.components);
+            this.madeByLbl = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.cellGrpBox.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -226,11 +230,38 @@ namespace kolko_i_krzyzyk
             this.messageLbl.Text = "Komunikat";
             this.messageLbl.Visible = false;
             // 
+            // timer
+            // 
+            this.timer.Interval = 700;
+            this.timer.Tick += new System.EventHandler(this.timer_Tick);
+            // 
+            // madeByLbl
+            // 
+            this.madeByLbl.AutoSize = true;
+            this.madeByLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.madeByLbl.Location = new System.Drawing.Point(95, 426);
+            this.madeByLbl.Name = "madeByLbl";
+            this.madeByLbl.Size = new System.Drawing.Size(112, 13);
+            this.madeByLbl.TabIndex = 14;
+            this.madeByLbl.Text = "Piotr Bujnowski 49088";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label1.Location = new System.Drawing.Point(32, 426);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(60, 13);
+            this.label1.TabIndex = 15;
+            this.label1.Text = "Wykonal:";
+            // 
             // kolko_i_krzyzyk
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(378, 447);
+            this.ClientSize = new System.Drawing.Size(378, 448);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.madeByLbl);
             this.Controls.Add(this.messageLbl);
             this.Controls.Add(this.vsLbl);
             this.Controls.Add(this.choiceBtnRight);
@@ -263,6 +294,9 @@ namespace kolko_i_krzyzyk
         private System.Windows.Forms.Button choiceBtnRight;
         private System.Windows.Forms.Label vsLbl;
         private System.Windows.Forms.Label messageLbl;
+        private System.Windows.Forms.Timer timer;
+        private System.Windows.Forms.Label madeByLbl;
+        private System.Windows.Forms.Label label1;
     }
 }
 

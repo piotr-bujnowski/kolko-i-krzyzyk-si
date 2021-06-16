@@ -45,7 +45,7 @@ namespace kolko_i_krzyzyk
 
             return checkWin(leftCross, rightCross, whoWins);
         }
-        
+
         // Sprawdź kto wygrał na podstawie wyników pionowych, poziomych i ukośnych
         public string checkWin(int horizontal, int vertical, string whoWins)
         {
@@ -114,5 +114,4 @@ namespace kolko_i_krzyzyk
             return clickCount == 9;
         }
     }
-    
 }

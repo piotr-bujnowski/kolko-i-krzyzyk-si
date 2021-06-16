@@ -59,47 +59,61 @@ namespace kolko_i_krzyzyk
                 cell.Text = Mark.X.ToString();
                 cell.Enabled = false;
                 clickCounter += 1;
-
                 checkWins();
 
                 if (!this.gameEnded)
                 {
-                    insertIntoRandomNotOccupiedCell(Mark.O.ToString());
-                    ocupationMsg(cell, Mark.O.ToString());
+                    Button randomInsertBtn = insertIntoRandomNotOccupiedCell(Mark.O.ToString());
+                    ocupationMsg(randomInsertBtn, Mark.O.ToString());
                     predictWins();
                     clickCounter += 1;
+                    checkWins();
                 }
+                checkWins();
             }
             else if (choiceBtnLeft.Text == Choice.KOMPUTER.ToString() && choiceBtnRight.Text == Choice.CZŁOWIEK.ToString())
             {
                 cell.Text = Mark.O.ToString();
                 cell.Enabled = false;
                 clickCounter += 1;
-                
                 checkWins();
 
                 if (!this.gameEnded)
                 {
-                    insertIntoRandomNotOccupiedCell(Mark.X.ToString());
-                    ocupationMsg(cell, Mark.X.ToString());
+                    Button randomInsertBtn = insertIntoRandomNotOccupiedCell(Mark.X.ToString());
+                    ocupationMsg(randomInsertBtn, Mark.X.ToString());
+                    //ocupationMsg(cell, Mark.X.ToString());
                     predictWins();
                     clickCounter += 1;
+                    checkWins();
                 }
+            }
+        }
+
+        // Timer dla KOMPUTER vs KOMPUTER
+        private void timer_Tick(object sender, EventArgs e)
+        {
+            if (!gameEnded)
+            {
+                Button randomInsertBtn = insertIntoRandomNotOccupiedCell(clickCounter % 2 == 0 ? "X" : "O");
+                clickCounter++;
+                ocupationMsg(randomInsertBtn, clickCounter % 2 == 0 ? "X" : "O");
+                predictWins();
+                checkWins();
+            }
+            else 
+            { 
+                timer.Enabled = false;
+                startResetBtn.Enabled = true;
             }
         }
 
         private void predictWins()
         {
             if (model.predictRowColWin(cellArray) == "X"
-                    || model.predictForCrossWins(cellArray) == "X")
-            {
-                messageLbl.Text = "Gracz X wygra\n w następnym ruchu!";
-            }
+                    || model.predictForCrossWins(cellArray) == "X") { messageLbl.Text = "Gracz X wygra\n w następnym ruchu!"; }
             else if (model.predictRowColWin(cellArray) == "O"
-                || model.predictForCrossWins(cellArray) == "O")
-            {
-                messageLbl.Text = "Gracz O wygra\n w następnym ruchu!";
-            }
+                || model.predictForCrossWins(cellArray) == "O") { messageLbl.Text = "Gracz O wygra\n w następnym ruchu!"; }
         }
 
         private void checkWins()
@@ -139,31 +153,31 @@ namespace kolko_i_krzyzyk
             switch (btn.Name)
             {
                 case "A1":
-                    messageLbl.Text = $"Gracz {whoseTurn} \nzająl górny lewy róg!";
+                    messageLbl.Text = $"Gracz {whoseTurn}\n zająl górny lewy róg!";
                     break;
                 case "A2":
-                    messageLbl.Text = $"Gracz {whoseTurn} \nzająl górny środek!";
+                    messageLbl.Text = $"Gracz {whoseTurn}\n zająl górny środek!";
                     break;
                 case "A3":
-                    messageLbl.Text = $"Gracz {whoseTurn} \nzająl górny prawy róg!";
+                    messageLbl.Text = $"Gracz {whoseTurn}\n zająl górny prawy róg!";
                     break;
                 case "B1":
-                    messageLbl.Text = $"Gracz {whoseTurn} \nzająl lewy środek!";
+                    messageLbl.Text = $"Gracz {whoseTurn}\n zająl lewy środek!";
                     break;
                 case "B2":
-                    messageLbl.Text = $"Gracz {whoseTurn} \nzająl środek!";
+                    messageLbl.Text = $"Gracz {whoseTurn}\n zająl środek!";
                     break;
                 case "B3":
-                    messageLbl.Text = $"Gracz {whoseTurn} \nzająl prawy środek!";
+                    messageLbl.Text = $"Gracz {whoseTurn}\n zająl prawy środek!";
                     break;
                 case "C1":
-                    messageLbl.Text = $"Gracz {whoseTurn} \nzająl lewy róg!";
+                    messageLbl.Text = $"Gracz {whoseTurn}\n zająl lewy róg!";
                     break;
                 case "C2":
-                    messageLbl.Text = $"Gracz {whoseTurn} \nzająl dolny środek!";
+                    messageLbl.Text = $"Gracz {whoseTurn}\n zająl dolny środek!";
                     break;
                 case "C3":
-                    messageLbl.Text = $"Gracz {whoseTurn} \nzająl prawy róg!";
+                    messageLbl.Text = $"Gracz {whoseTurn}\n zająl prawy róg!";
                     break;
             }
         }
@@ -210,11 +224,18 @@ namespace kolko_i_krzyzyk
                     insertIntoRandomNotOccupiedCell("X");
                     clickCounter += 1;
                 }
+
+                if (choiceBtnLeft.Text == Choice.KOMPUTER.ToString() && choiceBtnRight.Text == Choice.KOMPUTER.ToString())
+                {
+                    this.timer.Enabled = true;
+                    enableAllCells(false);
+                    startResetBtn.Enabled = false;
+                }
             }
         }
 
         // Wstaw kółko lub krzyżyk ( whoseTurn ) w losowe puste pole
-        public void insertIntoRandomNotOccupiedCell(String whoseTurn)
+        public Button insertIntoRandomNotOccupiedCell(String whoseTurn)
         {
             int randomIndex = random.Next(0, 9);
             Button randomBtn = getCellList()[randomIndex];
@@ -227,6 +248,8 @@ namespace kolko_i_krzyzyk
             //randomBtn.Text = whoseTurn;
             randomBtn.Enabled = false;
             getCellList()[getCellList().IndexOf(randomBtn)].Text = whoseTurn;
+
+            return randomBtn;
         }
 
         private void enableAllCells(bool enable)
