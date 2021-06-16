@@ -28,7 +28,6 @@ namespace kolko_i_krzyzyk
                 { B1, B2, B3 },
                 { C1, C2, C3 }
             };
-
             enableAllCells(false);
         }
 
@@ -42,13 +41,17 @@ namespace kolko_i_krzyzyk
                 if (clickCounter % 2 == 0)
                 {
                     cell.Text = Mark.X.ToString();
+                    ocupationMsg(cell, Mark.X.ToString());
                 }
                 else
                 {
                     cell.Text = Mark.O.ToString();
+                    ocupationMsg(cell, Mark.O.ToString());
                 }
                 cell.Enabled = false;
                 clickCounter += 1;
+
+                checkWins();
             }
             else if (choiceBtnLeft.Text == Choice.CZŁOWIEK.ToString() && choiceBtnRight.Text == Choice.KOMPUTER.ToString())
             {
@@ -56,11 +59,12 @@ namespace kolko_i_krzyzyk
                 cell.Enabled = false;
                 clickCounter += 1;
 
-                checkWinsThread();
+                checkWins();
 
                 if (!this.gameEnded)
                 {
                     insertIntoRandomNotOccupiedCell(Mark.O.ToString());
+                    ocupationMsg(cell, Mark.O.ToString());
                     clickCounter += 1;
                 }
             }
@@ -70,20 +74,22 @@ namespace kolko_i_krzyzyk
                 cell.Enabled = false;
                 clickCounter += 1;
 
+                checkWins();
+
                 if (!this.gameEnded)
                 {
                     insertIntoRandomNotOccupiedCell(Mark.X.ToString());
+                    ocupationMsg(cell, Mark.X.ToString());
                     clickCounter += 1;
                 }
             }
-            checkWinsThread();
         }
 
-        private void checkWinsThread()
+        private void checkWins()
         {
             if (model.isDraw(clickCounter))
             {
-                enableAllCells(true);
+                enableAllCells(false);
                 messageLbl.Text = "Remis!";
                 messageLbl.Visible = true;
                 this.gameEnded = true;
@@ -110,6 +116,41 @@ namespace kolko_i_krzyzyk
             }
         }
 
+        // Informacja o zajęziu komórki ( cell )
+        private void ocupationMsg(Button btn, String whoseTurn)
+        {
+            switch (btn.Name)
+            {
+                case "A1":
+                    messageLbl.Text = $"Gracz {whoseTurn} \nzająl górny lewy róg!";
+                    break;
+                case "A2":
+                    messageLbl.Text = $"Gracz {whoseTurn} \nzająl górny środek!";
+                    break;
+                case "A3":
+                    messageLbl.Text = $"Gracz {whoseTurn} \nzająl górny prawy róg!";
+                    break;
+                case "B1":
+                    messageLbl.Text = $"Gracz {whoseTurn} \nzająl lewy środek!";
+                    break;
+                case "B2":
+                    messageLbl.Text = $"Gracz {whoseTurn} \nzająl środek!";
+                    break;
+                case "B3":
+                    messageLbl.Text = $"Gracz {whoseTurn} \nzająl prawy środek!";
+                    break;
+                case "C1":
+                    messageLbl.Text = $"Gracz {whoseTurn} \nzająl lewy róg!";
+                    break;
+                case "C2":
+                    messageLbl.Text = $"Gracz {whoseTurn} \nzająl dolny środek!";
+                    break;
+                case "C3":
+                    messageLbl.Text = $"Gracz {whoseTurn} \nzająl prawy róg!";
+                    break;
+            }
+        }
+
         // Event Listener dla przycisków wyboru
         private void ChoiceBtns_Click(object sender, EventArgs e)
         {
@@ -129,7 +170,6 @@ namespace kolko_i_krzyzyk
         {
             if (startResetBtn.Text == "WYCZYŚĆ")
             {
-
                 gameEnded = false;
                 startResetBtn.Text = "START";
                 messageLbl.Text = "Komunikat";
@@ -145,7 +185,7 @@ namespace kolko_i_krzyzyk
                 enableAllCells(true);
                 choiceBtnLeft.Enabled = false;
                 choiceBtnRight.Enabled = false;
-
+                messageLbl.Visible = true;
                 clickCounter = 0;
 
                 if (choiceBtnLeft.Text == Choice.KOMPUTER.ToString() && choiceBtnRight.Text == Choice.CZŁOWIEK.ToString())

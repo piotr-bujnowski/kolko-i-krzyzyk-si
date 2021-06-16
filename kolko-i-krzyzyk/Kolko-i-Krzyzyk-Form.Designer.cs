@@ -218,10 +218,10 @@ namespace kolko_i_krzyzyk
             // messageLbl
             // 
             this.messageLbl.AutoSize = true;
-            this.messageLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.messageLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.messageLbl.Location = new System.Drawing.Point(32, 380);
             this.messageLbl.Name = "messageLbl";
-            this.messageLbl.Size = new System.Drawing.Size(70, 16);
+            this.messageLbl.Size = new System.Drawing.Size(79, 16);
             this.messageLbl.TabIndex = 13;
             this.messageLbl.Text = "Komunikat";
             this.messageLbl.Visible = false;
@@ -230,7 +230,7 @@ namespace kolko_i_krzyzyk
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(378, 426);
+            this.ClientSize = new System.Drawing.Size(378, 447);
             this.Controls.Add(this.messageLbl);
             this.Controls.Add(this.vsLbl);
             this.Controls.Add(this.choiceBtnRight);
