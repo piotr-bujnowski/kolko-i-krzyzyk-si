@@ -12,7 +12,7 @@ namespace kolko_i_krzyzyk
         private Button[,] cellArray; // Tablica do kółko i krzyżyk
         private Model model; // Logika kółko i krzyżyk - Model
         private int clickCounter; // Monitorowanie ilości ruchów
-        private bool gameEnded;
+        private bool gameEnded = false;
         private Random random;
 
         public kolko_i_krzyzyk()
@@ -56,17 +56,57 @@ namespace kolko_i_krzyzyk
                 cell.Enabled = false;
                 clickCounter += 1;
 
-                insertIntoRandomNotOccupiedCell(Mark.O.ToString());
-                clickCounter += 1;
+                checkWinsThread();
+
+                if (!this.gameEnded)
+                {
+                    insertIntoRandomNotOccupiedCell(Mark.O.ToString());
+                    clickCounter += 1;
+                }
             }
             else if (choiceBtnLeft.Text == Choice.KOMPUTER.ToString() && choiceBtnRight.Text == Choice.CZŁOWIEK.ToString())
             {
                 cell.Text = Mark.O.ToString();
                 cell.Enabled = false;
                 clickCounter += 1;
-                
-                insertIntoRandomNotOccupiedCell(Mark.X.ToString());
-                clickCounter += 1;
+
+                if (!this.gameEnded)
+                {
+                    insertIntoRandomNotOccupiedCell(Mark.X.ToString());
+                    clickCounter += 1;
+                }
+            }
+            checkWinsThread();
+        }
+
+        private void checkWinsThread()
+        {
+            if (model.isDraw(clickCounter))
+            {
+                enableAllCells(true);
+                messageLbl.Text = "Remis!";
+                messageLbl.Visible = true;
+                this.gameEnded = true;
+            }
+
+            // Sprawdzenie czy ktoś wygrał
+            if (model.checkRowColWin(cellArray) == Mark.X.ToString()
+               || model.checkForCrossWins(cellArray) == Mark.X.ToString())
+            {
+                enableAllCells(false);
+
+                messageLbl.Visible = true;
+                messageLbl.Text = "Gracz X wygrał!";
+                this.gameEnded = true;
+            }
+            else if (model.checkRowColWin(cellArray) == Mark.O.ToString()
+                || model.checkForCrossWins(cellArray) == Mark.O.ToString())
+            {
+                enableAllCells(false);
+
+                messageLbl.Visible = true;
+                messageLbl.Text = "Gracz O wygrał!";
+                this.gameEnded = true;
             }
         }
 
@@ -89,14 +129,17 @@ namespace kolko_i_krzyzyk
         {
             if (startResetBtn.Text == "WYCZYŚĆ")
             {
+
+                gameEnded = false;
                 startResetBtn.Text = "START";
                 messageLbl.Text = "Komunikat";
                 getCellList().ForEach(c => c.Text = " ");
                 enableAllCells(false);
                 choiceBtnLeft.Enabled = true;
                 choiceBtnRight.Enabled = true;
+                messageLbl.Visible = false;
             }
-            else
+            else if (startResetBtn.Text == "START")
             {
                 startResetBtn.Text = "WYCZYŚĆ";
                 enableAllCells(true);
