@@ -51,6 +51,7 @@ namespace kolko_i_krzyzyk
                 cell.Enabled = false;
                 clickCounter += 1;
 
+                predictWins();
                 checkWins();
             }
             else if (choiceBtnLeft.Text == Choice.CZŁOWIEK.ToString() && choiceBtnRight.Text == Choice.KOMPUTER.ToString())
@@ -65,6 +66,7 @@ namespace kolko_i_krzyzyk
                 {
                     insertIntoRandomNotOccupiedCell(Mark.O.ToString());
                     ocupationMsg(cell, Mark.O.ToString());
+                    predictWins();
                     clickCounter += 1;
                 }
             }
@@ -73,15 +75,30 @@ namespace kolko_i_krzyzyk
                 cell.Text = Mark.O.ToString();
                 cell.Enabled = false;
                 clickCounter += 1;
-
+                
                 checkWins();
 
                 if (!this.gameEnded)
                 {
                     insertIntoRandomNotOccupiedCell(Mark.X.ToString());
                     ocupationMsg(cell, Mark.X.ToString());
+                    predictWins();
                     clickCounter += 1;
                 }
+            }
+        }
+
+        private void predictWins()
+        {
+            if (model.predictRowColWin(cellArray) == "X"
+                    || model.predictForCrossWins(cellArray) == "X")
+            {
+                messageLbl.Text = "Gracz X wygra\n w następnym ruchu!";
+            }
+            else if (model.predictRowColWin(cellArray) == "O"
+                || model.predictForCrossWins(cellArray) == "O")
+            {
+                messageLbl.Text = "Gracz O wygra\n w następnym ruchu!";
             }
         }
 
