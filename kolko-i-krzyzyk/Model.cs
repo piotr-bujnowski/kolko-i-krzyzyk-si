@@ -9,6 +9,7 @@ namespace kolko_i_krzyzyk
 {
     class Model
     {
+        // Sprawdź wgrane pionowe i poziome
         public string checkRowColWin(Button[,] cellArray)
         {
             string whoWins = "";
@@ -29,6 +30,7 @@ namespace kolko_i_krzyzyk
             return whoWins;
         }
 
+        // Sprawdź wgrane ukośne
         public string checkForCrossWins(Button[,] cellArray)
         {
             string whoWins = "";
@@ -44,7 +46,7 @@ namespace kolko_i_krzyzyk
             return checkWin(leftCross, rightCross, whoWins);
         }
         
-
+        // Sprawdź kto wygrał na podstawie wyników pionowych, poziomych i ukośnych
         public string checkWin(int horizontal, int vertical, string whoWins)
         {
             if (horizontal == 264 || vertical == 264)
@@ -57,6 +59,8 @@ namespace kolko_i_krzyzyk
             }
             return whoWins;
         }
+
+        // Sprawdź czy jest remis
         public bool isDraw(int clickCount)
         {
             return clickCount == 9;

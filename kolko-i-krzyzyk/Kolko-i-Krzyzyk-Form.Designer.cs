@@ -178,6 +178,7 @@ namespace kolko_i_krzyzyk
             this.startResetBtn.Name = "startResetBtn";
             this.startResetBtn.Size = new System.Drawing.Size(112, 28);
             this.startResetBtn.TabIndex = 9;
+            this.startResetBtn.TabStop = false;
             this.startResetBtn.Text = "START";
             this.startResetBtn.UseVisualStyleBackColor = true;
             this.startResetBtn.Click += new System.EventHandler(this.startResetBtn_Click);
@@ -188,6 +189,7 @@ namespace kolko_i_krzyzyk
             this.choiceBtnLeft.Name = "choiceBtnLeft";
             this.choiceBtnLeft.Size = new System.Drawing.Size(120, 28);
             this.choiceBtnLeft.TabIndex = 10;
+            this.choiceBtnLeft.TabStop = false;
             this.choiceBtnLeft.Text = "CZŁOWIEK";
             this.choiceBtnLeft.UseVisualStyleBackColor = true;
             this.choiceBtnLeft.Click += new System.EventHandler(this.ChoiceBtns_Click);
@@ -198,6 +200,7 @@ namespace kolko_i_krzyzyk
             this.choiceBtnRight.Name = "choiceBtnRight";
             this.choiceBtnRight.Size = new System.Drawing.Size(120, 28);
             this.choiceBtnRight.TabIndex = 11;
+            this.choiceBtnRight.TabStop = false;
             this.choiceBtnRight.Text = "CZŁOWIEK";
             this.choiceBtnRight.UseVisualStyleBackColor = true;
             this.choiceBtnRight.Click += new System.EventHandler(this.ChoiceBtns_Click);
@@ -221,6 +224,7 @@ namespace kolko_i_krzyzyk
             this.messageLbl.Size = new System.Drawing.Size(70, 16);
             this.messageLbl.TabIndex = 13;
             this.messageLbl.Text = "Komunikat";
+            this.messageLbl.Visible = false;
             // 
             // kolko_i_krzyzyk
             // 

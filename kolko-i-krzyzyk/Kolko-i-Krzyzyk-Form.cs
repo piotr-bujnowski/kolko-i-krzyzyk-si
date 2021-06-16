@@ -1,21 +1,17 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace kolko_i_krzyzyk
 {
     public partial class kolko_i_krzyzyk : Form
     {
-        private Button[,] cellArray;
-        private Model model;
-        private int clickCounter;
+        private Button[,] cellArray; // Tablica do kółko i krzyżyk
+        private Model model; // Logika kółko i krzyżyk - Model
+        private int clickCounter; // Monitorowanie ilości ruchów
         private bool gameEnded;
         private Random random;
 
@@ -25,6 +21,7 @@ namespace kolko_i_krzyzyk
             this.model = new Model();
             this.random = new Random();
 
+            // Dodanie przycisków ( cell ) do tablicy
             cellArray = new Button[3, 3]
             {
                 { A1, A2, A3 },
@@ -35,6 +32,7 @@ namespace kolko_i_krzyzyk
             enableAllCells(false);
         }
 
+        // Event Listener dla przycisków (cells)
         private void Cell_Click(object sender, EventArgs e)
         {
             Button cell = (Button)sender;
@@ -70,29 +68,9 @@ namespace kolko_i_krzyzyk
                 insertIntoRandomNotOccupiedCell(Mark.X.ToString());
                 clickCounter += 1;
             }
-
-
-            if (model.isDraw(clickCounter))
-            {
-                enableAllCells(false);
-                messageLbl.Text = "Remis!";
-            }
-
-            if (model.checkRowColWin(cellArray) == Mark.X.ToString()
-               || model.checkForCrossWins(cellArray) == Mark.X.ToString())
-            {
-                enableAllCells(false);
-                messageLbl.Text = "Gracz X wygrał!";
-
-            }
-            else if (model.checkRowColWin(cellArray) == Mark.O.ToString()
-                || model.checkForCrossWins(cellArray) == Mark.O.ToString())
-            {
-                enableAllCells(false);
-                messageLbl.Text = "Gracz O wygrał!";
-            }
         }
 
+        // Event Listener dla przycisków wyboru
         private void ChoiceBtns_Click(object sender, EventArgs e)
         {
             Button choiceBtn = (Button)sender;
@@ -106,6 +84,7 @@ namespace kolko_i_krzyzyk
             }
         }
 
+        // Event Listener dla przycisku START / RESET
         private void startResetBtn_Click(object sender, EventArgs e)
         {
             if (startResetBtn.Text == "WYCZYŚĆ")
@@ -133,6 +112,8 @@ namespace kolko_i_krzyzyk
                 }
             }
         }
+
+        // Wstaw kółko lub krzyżyk ( whoseTurn ) w losowe puste pole
         public void insertIntoRandomNotOccupiedCell(String whoseTurn)
         {
             int randomIndex = random.Next(0, 9);
@@ -153,6 +134,7 @@ namespace kolko_i_krzyzyk
             getCellList().ForEach(c => c.Enabled = enable ? true : false);
         }
 
+        // Pobierz tablice pól jako liste
         private List<Button> getCellList()
         {
             return cellArray.Cast<Button>().ToList();
